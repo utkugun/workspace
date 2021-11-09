@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import { button } from './button';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { button } from './button';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, MatSliderModule, BrowserAnimationsModule,MatButtonModule,MatToolbarModule,MatCardModule
+    AppRoutingModule, MatSliderModule, BrowserAnimationsModule,MatButtonModule,MatToolbarModule,MatCardModule,HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
