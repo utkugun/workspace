@@ -19,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, MatSliderModule, BrowserAnimationsModule,MatButtonModule,MatToolbarModule,MatCardModule,HttpClientModule,
+    AppRoutingModule, MatSliderModule, BrowserAnimationsModule,MatButtonModule,MatToolbarModule,MatCardModule,HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

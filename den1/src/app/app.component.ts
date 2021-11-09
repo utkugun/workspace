@@ -1,22 +1,25 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './api.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+ ad:string="utku"
+  champ: any ;
+  len:any;
+  url = "lol.json";
  
-  champ: any = [];
   constructor(private api: ApiService) {}
 
-  getchamps() {
-    this.api.getir().subscribe(data => {
-        for (const d of (data as any)) 
-        {this.champ.push(d.data)}
-        console.log(this.champ)
-    })
-  }
+  ngOnInit() {
+ 
+  this.api.getir().subscribe(data => {
+    this.champ=Array.of(data)
+   
+  })
 
-}
+  }}
