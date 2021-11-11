@@ -1,7 +1,32 @@
 
 <h1>{{ad}}</h1>
+
+<mat-form-field appearance="fill">
+<mat-select [(ngModel)]="selectedValue" #t (selectionChange)="sel(t.value,t1.value)">
+    <mat-option *ngFor="let x of champ" [value]="x">
+      {{x}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br>
+
+<mat-form-field appearance="fill">
+<mat-select [(ngModel)]="selectedValue1"  #t1 (selectionChange)="sel(t.value,t1.value)">
+    <mat-option *ngFor="let y of ozellik" [value]="y">
+      {{y}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
 <ul>
-    <li *ngFor="let d of champ">
-      {{d.data|json}}
+    <li>
+       <h2> {{data|uppercase}}</h2>
     </li>
- </ul>
+</ul>
+
+
+<img src={{pic}}>
+
+<div>
+<ng-image-slider [images]="imgCollection" [imageSize]="{width: '60%', height: '60%',space: 4}" #nav></ng-image-slider>
+</div>
