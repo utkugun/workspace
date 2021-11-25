@@ -17,9 +17,13 @@ import {MatDividerModule} from '@angular/material/divider';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { ResimComponent } from './resim/resim.component';
 import { TreeComponent } from './tree/tree.component';
+import { DetayComponent } from './detay/detay.component';
+import { SpellsComponent } from './detay/spells/spells.component';
+
+
 @NgModule({
   declarations: [
-    AppComponent, ResimComponent,TreeComponent
+    AppComponent, ResimComponent,TreeComponent, DetayComponent, SpellsComponent
   ],
   imports: [
     BrowserModule,

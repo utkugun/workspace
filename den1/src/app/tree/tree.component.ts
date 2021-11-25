@@ -21,8 +21,8 @@ export class TreeComponent implements OnInit {
 
   config = TreeviewConfig.create({
     hasAllCheckBox: false,
-    hasFilter: false,
-    hasCollapseExpand: true,
+    hasFilter: true,
+    hasCollapseExpand: false,
     decoupleChildFromParent: false,
     maxHeight: 400
   });

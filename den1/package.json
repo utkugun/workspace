@@ -23,6 +23,7 @@
     "@igniteui/material-icons-extended": "^2.8.0",
     "@juggle/resize-observer": "^3.3.0",
     "angular-json-tree": "^1.1.0",
+    "galeforce": "^0.5.1",
     "hammerjs": "^2.0.8",
     "igniteui-angular": "^12.2.5",
     "jszip": "^3.6.0",
@@ -31,9 +32,9 @@
     "ngx-treeview": "^10.0.2",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
+    "twisted": "^1.46.3",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.11.4"
-    
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.0.1",

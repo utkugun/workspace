@@ -1,0 +1,45 @@
+<ul class="tit">
+    <br>
+    <li *ngFor="let item of detayarr">
+        <br> <b> {{item|uppercase}}:</b>
+        <br>{{kahdetay[item]}}
+    </li>
+</ul>
+
+
+<ul>
+    <li class="tit1" *ngFor="let item of detayarr1">
+
+
+
+        <div
+            *ngIf=" 'skins'!=item && 'image'!=item && 'passive'!=item && 'info'!=item && 'stats'!=item && 'spells'!=item  ">
+            <br>
+            <b>{{item|uppercase}}:</b>
+            <br>{{kahdetay[item]}}
+        </div>
+        <div *ngIf=" 'passive'==item"> <br> <b>{{item|uppercase}}:</b>
+
+            <p>
+                <img
+                    src='http://ddragon.leagueoflegends.com/cdn/11.23.1/img/passive/{{kahdetay[item]["image"]["full"]}}'>
+            </p>
+            <br>
+            <p>{{kahdetay[item]["name"]}}</p>
+            <br>
+            <p [innerHTML]='kahdetay[item]["description"]'></p>
+            <br>
+            <p [innerHTML]='kahdetay[item]["sanitizedDescription"]'></p>
+        </div>
+
+        <div *ngIf=" 'info'==item"> <br> <b>{{item|uppercase}}:</b>
+            <br> <p>{{kahdetay[item]|json}}</p>
+        </div>
+
+        <div *ngIf=" 'stats'==item"> <br> <b>{{item|uppercase}}:</b>
+            <br><p>{{kahdetay[item]|json}}</p>
+        </div>
+
+       
+    </li>
+</ul>

@@ -15,8 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ozellik: any = [];
   kah: any;
   len: any = 0;
-  selectedValue: any = "";
-  selectedValue1: any = "";
+
   dat: any = "";
   pic: any = "";
   message: string = "";
@@ -55,14 +54,8 @@ export class AppComponent implements OnInit, OnDestroy {
   sel(sel1: string): void {
 
     this.data.changeMessage(sel1)
-
-
-
-
-
-
-
-
+   
+    
 
   }
 

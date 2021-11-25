@@ -1,0 +1,15 @@
+
+     
+ <div *ngFor="let k of kahdetay; let z = index">
+
+<img src='http://ddragon.leagueoflegends.com/cdn/11.23.1/img/spell/{{kahdetay[z]["image"]["full"]}}'>
+
+<br><b>ID :</b>{{kahdetay[z]["id" ]}}
+<br><b>Name :</b>{{kahdetay[z]["name" ]}}
+<br><b>Description :</b><span [innerHTML]='kahdetay[z]["description"]'></span>
+<br><b>Level Tip :</b><span [innerHTML]='kahdetay[z]["leveltip"]["label"]'></span>
+<br><b>Max Rank :</b><span [innerHTML]='kahdetay[z]["maxrank"]'></span>
+<br><b>Cost Type :</b><span>{{ kahdetay[z]["costType"]}}</span>
+</div>
+
+{{abilityresourcename}}

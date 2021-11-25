@@ -4,29 +4,28 @@
 
 
 <br>
-<p> <a routerLink="/"><button mat-raised-button color="primary">Ana Sayfa</button></a></p>
+<p> 
+  <a routerLink="/"><button mat-raised-button color="primary">Ana Sayfa</button></a>
+  <a routerLink="/tree"><button mat-raised-button color="primary">Özellikler</button></a>
+  <a routerLink="/resim"><button mat-raised-button color="primary">Resim</button></a>
+  <a routerLink="/detay"><button mat-raised-button color="primary">Detay</button></a>
+  <a routerLink="/detay/spells"><button mat-raised-button color="primary">Spells</button></a>
+</p>
 <mat-divider></mat-divider>
 <br>
 <p>
   <mat-form-field appearance="fill">
-    <mat-select [(ngModel)]="selectedValue" #t (selectionChange)="sel(t.value)">
+    <mat-select  #t (selectionChange)="sel(t.value)">
       <mat-option *ngFor="let x of champ" [value]="x.replace(' ','')">
         <button mat-raised-button color="primary"> {{x}}</button>
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-divider></mat-divider>
-  <br>
 
 
 
-  <br>
-<nav>
-  <p> <a routerLink="/tree"><button mat-raised-button color="primary">Özellikler</button></a>
-    <a routerLink="/resim"><button mat-raised-button color="primary">Resim</button></a>
-  </p>
-</nav>
-<mat-divider></mat-divider>
+
 
 
 <br>
