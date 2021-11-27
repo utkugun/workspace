@@ -1,15 +1,24 @@
+<mat-slider min="0" max="4" step="1" value="1" #t (change)="slider(t.value)"></mat-slider>
+{{sliderval}}{{tooltip}}
 
-     
- <div *ngFor="let k of kahdetay; let z = index">
+<table border="1">
+    
+ <td  *ngFor="let k of kahdetay; let z = index">
+ 
 
-<img src='http://ddragon.leagueoflegends.com/cdn/11.23.1/img/spell/{{kahdetay[z]["image"]["full"]}}'>
 
-<br><b>ID :</b>{{kahdetay[z]["id" ]}}
-<br><b>Name :</b>{{kahdetay[z]["name" ]}}
-<br><b>Description :</b><span [innerHTML]='kahdetay[z]["description"]'></span>
-<br><b>Level Tip :</b><span [innerHTML]='kahdetay[z]["leveltip"]["label"]'></span>
-<br><b>Max Rank :</b><span [innerHTML]='kahdetay[z]["maxrank"]'></span>
-<br><b>Cost Type :</b><span>{{ kahdetay[z]["costType"]}}</span>
-</div>
+<tr><img src='http://ddragon.leagueoflegends.com/cdn/11.23.1/img/spell/{{kahdetay[z]["image"]["full"]}}'></tr>
+<tr><td>ID :{{kahdetay[z]["id" ]}}</td></tr>
+<tr><td>Name :{{kahdetay[z]["name" ]}}</td></tr>
+<tr><td>Description :<span [innerHTML]='kahdetay[z]["description"]'></span></td></tr>
+<tr><td>Max Rank :<span [innerHTML]='kahdetay[z]["maxrank"]'></span></td></tr>
+<tr><td>Cost Type :<span [innerHTML]='costtype[z]'></span></td></tr>
+<tr><td>Tool Tip :<span [innerHTML]='tooltip[z]'></span></td></tr>
 
-{{abilityresourcename}}
+</td>
+
+</table>
+
+
+
+

@@ -19,11 +19,13 @@ import { ResimComponent } from './resim/resim.component';
 import { TreeComponent } from './tree/tree.component';
 import { DetayComponent } from './detay/detay.component';
 import { SpellsComponent } from './detay/spells/spells.component';
+import { SafePipe } from './safe.pipe';
+import { ThreeComponent } from './three/three/three.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, ResimComponent,TreeComponent, DetayComponent, SpellsComponent
+    AppComponent, ResimComponent,TreeComponent, DetayComponent, SpellsComponent, SafePipe, ThreeComponent
   ],
   imports: [
     BrowserModule,
