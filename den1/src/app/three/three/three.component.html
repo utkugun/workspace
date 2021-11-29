@@ -1,2 +1,11 @@
-<p>three works!</p>
+<mat-form-field appearance="fill">
+    <mat-select  #t (selectionChange)="sel(t.value)">
+      <mat-option [value]=0>Animation 1</mat-option>
+      <mat-option [value]=1>Animation 2</mat-option>
+      <mat-option [value]=2>Animation 3</mat-option>
+      <mat-option [value]=3>Animation 4</mat-option>
+      <mat-option [value]=4>Animation 5</mat-option>
+    </mat-select>
+  </mat-form-field>
 <div #rend ></div>
+

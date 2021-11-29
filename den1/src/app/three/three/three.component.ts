@@ -1,8 +1,8 @@
-import { Component, OnInit,AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as THREE from "three";
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { ElementRef, ViewChild} from '@angular/core';
+import { ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-three',
@@ -13,65 +13,79 @@ export class ThreeComponent implements AfterViewInit {
   @ViewChild('rend') rend: ElementRef;
   constructor() { }
 
+
+
   ngAfterViewInit(): void {
+    const clock = new THREE.Clock();
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    var model: any
+    var renderer = new THREE.WebGLRenderer()
+    let mixer: THREE.AnimationMixer
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    this.rend.nativeElement.appendChild(renderer.domElement);
+
+
 
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    var model:any
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth / 2, window.innerHeight/2 );
-   
-       this.rend.nativeElement.appendChild(renderer.domElement);
-   
-
-    {
-      const skyColor = 0xB1E1FF;  // light blue
-      const groundColor = 0xB97A20;  // brownish orange
-      const intensity = 1;
-      const light = new THREE.HemisphereLight(skyColor, groundColor,1);
-      scene.add(light);
-    }
-    {
-      const color = 0xFFFFFF;
-      const intensity = 1;
-      const light = new THREE.DirectionalLight(color, intensity);
-      light.position.set(0, 10, 0);
-      light.target.position.set(-5, 0, 0);
-      scene.add(light);
-      scene.add(light.target);
-    }
-
-    const loader = new OBJLoader();
-
-    loader.load("https://raw.communitydragon.org/latest/game/assets/characters/aatrox/skins/base/aatrox/body.obj", (obj) => {
-          
-     obj.scale.set(0.05,0.05,0.05)
-     obj.translateY(-0.5)     
-     model=obj
-     scene.add(model)
+    var model: any
  
-    })
+
+    camera.position.set( 5, 2, 8 );
+
+    const controls = new OrbitControls( camera, renderer.domElement );
+			controls.target.set( 0, 0.5, 0 );
+			controls.update();
+			controls.enablePan = false;
+			controls.enableDamping = true;
+
+    const loader = new GLTFLoader().setPath("assets/aatrox/skin2/");
+    loader.load("skin2.gltf", (obj) => {
+
+      model = obj.scene
+   
+      model.position.set( 0, 0, 0 );
+      model.scale.set(0.02, 0.02, 0.02);
+      scene.add(model)
+
+      mixer = new THREE.AnimationMixer( model );
+      mixer.clipAction(obj.animations[ 0 ] ).play();
+
+    
+
+      animate();
+
+    },
+
+      function (xhr) {
+
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+      },
+
+      function (error) {
+        alert(error);
+      }
 
 
-
-    camera.position.z = 1;
-
-
+    )
 
     var animate = function () {
 
-      
+      requestAnimationFrame(animate)
+
+      var delta = clock.getDelta()
+      mixer.update(delta);
       renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-     model.rotation.y += 0.005; 
-    };
 
 
-
-    animate();
-
+    }
 
 
+  }
+
+  sel(val: string): void {
 
   }
 
