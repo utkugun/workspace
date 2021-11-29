@@ -3,37 +3,41 @@ import * as THREE from "three";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { ElementRef, ViewChild } from '@angular/core';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-three',
   templateUrl: './three.component.html',
   styleUrls: ['./three.component.css']
 })
 export class ThreeComponent implements AfterViewInit {
-  @ViewChild('rend') rend: ElementRef;
+ 
   constructor() { }
 
-
-
+  @ViewChild('rend') rend: ElementRef;
+  
   ngAfterViewInit(): void {
-    const clock = new THREE.Clock();
+    var clock = new THREE.Clock();
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     var model: any
     var renderer = new THREE.WebGLRenderer()
     let mixer: THREE.AnimationMixer
     renderer.setSize(window.innerWidth, window.innerHeight);
-
     this.rend.nativeElement.appendChild(renderer.domElement);
 
 
 
     var scene = new THREE.Scene();
+
+    scene.background = new THREE.Color( 0xa0a0a0 );
+    scene.fog = new THREE.Fog( 0xa0a0a0, 10, 50 );
+
+
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     var model: any
  
 
-    camera.position.set( 5, 2, 8 );
+    camera.position.set( -2, 2, 3 );
 
     const controls = new OrbitControls( camera, renderer.domElement );
 			controls.target.set( 0, 0.5, 0 );
@@ -41,13 +45,13 @@ export class ThreeComponent implements AfterViewInit {
 			controls.enablePan = false;
 			controls.enableDamping = true;
 
-    const loader = new GLTFLoader().setPath("assets/aatrox/skin2/");
+    const loader = new GLTFLoader().setPath("assets/ahri/skin2/");
     loader.load("skin2.gltf", (obj) => {
 
       model = obj.scene
    
       model.position.set( 0, 0, 0 );
-      model.scale.set(0.02, 0.02, 0.02);
+      model.scale.set(0.01, 0.01, 0.01);
       scene.add(model)
 
       mixer = new THREE.AnimationMixer( model );
@@ -61,8 +65,9 @@ export class ThreeComponent implements AfterViewInit {
 
       function (xhr) {
 
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-      },
+   
+      
+    },
 
       function (error) {
         alert(error);
@@ -86,7 +91,7 @@ export class ThreeComponent implements AfterViewInit {
   }
 
   sel(val: string): void {
-
+     
   }
 
 }
