@@ -17,27 +17,35 @@ export class ThreeComponent implements AfterViewInit {
   renderer:THREE.WebGLRenderer=new THREE.WebGLRenderer()
   mixer:THREE.AnimationMixer 
   scene:THREE.Scene= new THREE.Scene();
-  camera:THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-   clock:THREE.Clock = new THREE.Clock();
-  
+  camera:THREE.PerspectiveCamera 
+  clock:THREE.Clock = new THREE.Clock();
+  controls:OrbitControls
   ngAfterViewInit(): void {
    
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.rend.nativeElement.appendChild(this.renderer.domElement);
-    this.basla
+    this.basla()
   }
 
 
     basla():void{
-    
+   
+      const clock=this.clock;
+      const mixer=this.mixer
+      const controls=new this.controls(this.camera, this.renderer.domElement)
+      const camera=new this.camera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+      const renderer=this.renderer
+      const scene=this.scene
+
+
     this.scene.background = new THREE.Color(0xa0a0a0);
     this.scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
     var model: any
-    this.camera.position.set(-2, 2, 3);
-    const controls = new OrbitControls(this.camera, this.renderer.domElement);
+    camera.position.set(-2, 2, 3);
+   
     controls.target.set(0, 0.5, 0);
     controls.update();
-    controls.enablePan = false;
+   controls.enablePan = false;
     controls.enableDamping = true;
 
       const loader = new GLTFLoader().setPath("assets/ahri/skin2/");
@@ -49,26 +57,38 @@ export class ThreeComponent implements AfterViewInit {
      
       this.scene.add(model)
       this.mixer=new THREE.AnimationMixer(model)
-      this.mixer.clipAction(obj.animations[0]).play();
-      this.animate();
+      this.mixer.clipAction(obj.animations[2]).play();
+     
+ 
+     
+       
+    },
 
-    })
-  }
+    function ( xhr ) {alert( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );},
+
+    function ( error ) {alert( error );}
+    )
+
+     
+     animate();
+     function animate() {
+
+      requestAnimationFrame(animate)
+
+      var delta = clock.getDelta()
+      mixer.update(delta);
+
+      controls.update();
+      renderer.render(scene, camera);
 
 
-     animate():void {
-
-      requestAnimationFrame(this.animate)
-
-      var delta = this.clock.getDelta()
-      this.mixer.update(delta);
-      this.renderer.render(this.scene, this.camera);
-
-
+   }
+   
     }
-  
+ 
 
-  
+
+      
 
   sel(val: string): void {
 
