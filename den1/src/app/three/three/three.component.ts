@@ -112,7 +112,7 @@ export class ThreeComponent implements AfterViewInit, OnInit {
   
   sel(val: string): void {
     this.animnum = Number(val)
-    this.basla()
+    this.oynat()
    
   }
 
