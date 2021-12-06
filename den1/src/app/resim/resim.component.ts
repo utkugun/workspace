@@ -24,11 +24,11 @@ export class ResimComponent implements OnInit {
         this.resimler=d["data"][this.message]["skins"]
         this.resimler.forEach((res:any,index:number) => {
 
-          this.k = 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/' + this.message + '_' + res["num"] + '.jpg',
+          this.k = 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/' + this.message + '_' + res["num"] + '.jpg',
 
             this.imgCollection.push({
-              image: 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/' + this.message + '_' + res["num"] + '.jpg',
-              thumbImage: 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/' + this.message + '_' + res["num"] + '.jpg',
+              image: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/' + this.message + '_' + res["num"] + '.jpg',
+              thumbImage: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/' + this.message + '_' + res["num"] + '.jpg',
               alt: index,
               title: index
             })

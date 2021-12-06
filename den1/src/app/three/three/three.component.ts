@@ -4,94 +4,138 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { ElementRef, ViewChild } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DataService } from "../../data.service";
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-three',
   templateUrl: './three.component.html',
   styleUrls: ['./three.component.css']
 })
-export class ThreeComponent implements AfterViewInit {
+export class ThreeComponent implements AfterViewInit, OnInit {
 
-  constructor() { }
-
+  constructor(private data: DataService) { }
+  subscription: Subscription
   @ViewChild('rend') rend: ElementRef;
-  renderer:THREE.WebGLRenderer=new THREE.WebGLRenderer()
-  mixer:THREE.AnimationMixer 
-  scene:THREE.Scene= new THREE.Scene();
-  camera:THREE.PerspectiveCamera 
-  clock:THREE.Clock = new THREE.Clock();
-  controls:OrbitControls
+  renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer()
+
+  animnum: number = 0;
+
+  model: any
+  mixer: any
+  clip: any
+  action: any
+  controls: any
+  scene: any
+  camera: any
+  clock: any
+  obj: any
+  message: string
+  ngOnInit(): void { }
+
   ngAfterViewInit(): void {
-   
+
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.rend.nativeElement.appendChild(this.renderer.domElement);
-    this.basla()
+
+    this.subscription = this.data.currentMessage.subscribe((message: string) => {
+      this.message = message
+      this.basla()
+     
+    })
   }
 
 
-    basla():void{
-   
-      const clock=this.clock;
-      const mixer=this.mixer
-      const controls=new this.controls(this.camera, this.renderer.domElement)
-      const camera=new this.camera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-      const renderer=this.renderer
-      const scene=this.scene
+  basla(): void {
+    alert("11111111111111111111")
+    this.scene = new THREE.Scene();
+    this.scene.clear();
+    this.scene.background = new THREE.Color(0xbfe3dd);
+    this.camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 100);
+    this.camera.position.set(-1, 0.8, 5);
 
 
-    this.scene.background = new THREE.Color(0xa0a0a0);
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
+    this.controls.minDistance = 1;
+    this.controls.maxDistance = 10000;
+
+    window.addEventListener( 'resize', this.onWindowResize, false );
+
     this.scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
-    var model: any
-    camera.position.set(-2, 2, 3);
-   
-    controls.target.set(0, 0.5, 0);
-    controls.update();
-   controls.enablePan = false;
-    controls.enableDamping = true;
+    
+    const texture = new THREE.TextureLoader().load( 'assets/backrounds/nz.png' );
+    const material = new THREE.MeshBasicMaterial( { map: texture } );
+    const geometry = new THREE.PlaneGeometry(10, 10);
+    const plane = new THREE.Mesh(geometry, material);
+    plane.position.set(0, 0, -5);
+    this.scene.add(plane);
 
-      const loader = new GLTFLoader().setPath("assets/ahri/skin2/");
-      loader.load("skin2.gltf", (obj) => {
 
-      model = obj.scene
-      model.position.set(0, 0, 0);
-      model.scale.set(0.01, 0.01, 0.01);
-     
-      this.scene.add(model)
-      this.mixer=new THREE.AnimationMixer(model)
-      this.mixer.clipAction(obj.animations[2]).play();
-     
- 
-     
-       
+    const texture2 = new THREE.TextureLoader().load( 'assets/backrounds/nz.png' );
+    const material2 = new THREE.MeshBasicMaterial( { map:texture2,side: THREE.BackSide } );
+    const geometry2 = new THREE.PlaneGeometry(10, 10);
+    const plane2 = new THREE.Mesh(geometry2, material2);
+    plane2.rotateY( - Math.PI / 2 );
+    plane2.position.set(-5, 0, 0);
+    this.scene.add(plane2);
+
+    const loader = new GLTFLoader().setPath("assets/" + this.message.toLowerCase() + "/skin2/");
+    loader.load("skin2.gltf", (obj) => {
+      this.obj = obj
+      this.model = this.obj.scene
+      this.model.position.set(0, 0, 0);
+      this.model.scale.set(0.01, 0.01, 0.01);
+      this.scene.add(this.model)
+       oynat()
+    
     },
-
-    function ( xhr ) {alert( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );},
-
-    function ( error ) {alert( error );}
+      function (xhr) { console.log((xhr.loaded / xhr.total * 100) + '% loaded'); },
+      function (error) { alert("kahraman bulunamadı"); }
     )
-
-     
-     animate();
-     function animate() {
-
-      requestAnimationFrame(animate)
-
-      var delta = clock.getDelta()
-      mixer.update(delta);
-
-      controls.update();
-      renderer.render(scene, camera);
-
-
-   }
    
-    }
- 
+  }
+
+    oynat():void{
+      alert("22222222222222222222222222222")
+    this.clip = this.obj.animations[this.animnum]
+    this.mixer = new THREE.AnimationMixer(this.model)
+    this.action = this.mixer.clipAction(this.clip);
+    this.action.play();
+     
+    this.clock = new THREE.Clock();
+    alert("3333333333333333333333333")
+    this.animate();
+  }
 
 
-      
 
+  
   sel(val: string): void {
+    this.animnum = Number(val)
+    this.basla()
+   
+  }
+
+  
+
+   
+
+    animate(): void {
+      
+      requestAnimationFrame(this.animate.bind(this))
+      var delta = this.clock.getDelta()
+      this.mixer.update(delta);
+      this.controls.update();
+      this.renderer.render(this.scene, this.camera);
+   
 
   }
 
+  onWindowResize(){
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize( window.innerWidth, window.innerHeight );
+
+  }
 }
+

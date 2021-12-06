@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { TreeviewItem, TreeviewConfig } from 'ngx-treeview';
 import { DataService } from "./data.service";
 import { Subscription } from 'rxjs';
-const url = 'http://ddragon.leagueoflegends.com/cdn/11.22.1/data/tr_TR/champion.json';
+const url = 'https://ddragon.leagueoflegends.com/cdn/11.22.1/data/tr_TR/champion.json';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class ApiService {
   }
 
   getdetay(message:string) {
-       this.url1 = "http://ddragon.leagueoflegends.com/cdn/11.23.1/data/tr_TR/champion/" + message + ".json"
+       this.url1 = "https://ddragon.leagueoflegends.com/cdn/11.23.1/data/tr_TR/champion/" + message + ".json"
             return this.http.get(this.url1)
   }
 
