@@ -46,7 +46,7 @@ export class ThreeComponent implements AfterViewInit, OnInit {
 
 
   basla(): void {
-    alert("11111111111111111111")
+ 
     this.scene = new THREE.Scene();
     this.scene.clear();
     this.scene.background = new THREE.Color(0xbfe3dd);
@@ -63,22 +63,8 @@ export class ThreeComponent implements AfterViewInit, OnInit {
 
     this.scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
     
-    const texture = new THREE.TextureLoader().load( 'assets/backrounds/nz.png' );
-    const material = new THREE.MeshBasicMaterial( { map: texture } );
-    const geometry = new THREE.PlaneGeometry(10, 10);
-    const plane = new THREE.Mesh(geometry, material);
-    plane.position.set(0, 0, -5);
-    this.scene.add(plane);
-
-
-    const texture2 = new THREE.TextureLoader().load( 'assets/backrounds/nz.png' );
-    const material2 = new THREE.MeshBasicMaterial( { map:texture2,side: THREE.BackSide } );
-    const geometry2 = new THREE.PlaneGeometry(10, 10);
-    const plane2 = new THREE.Mesh(geometry2, material2);
-    plane2.rotateY( - Math.PI / 2 );
-    plane2.position.set(-5, 0, 0);
-    this.scene.add(plane2);
-
+   
+ 
     const loader = new GLTFLoader().setPath("assets/" + this.message.toLowerCase() + "/skin2/");
     loader.load("skin2.gltf", (obj) => {
       this.obj = obj
@@ -86,7 +72,7 @@ export class ThreeComponent implements AfterViewInit, OnInit {
       this.model.position.set(0, 0, 0);
       this.model.scale.set(0.01, 0.01, 0.01);
       this.scene.add(this.model)
-       this.oynat()
+      this.oynat()
     
     },
       function (xhr) { console.log((xhr.loaded / xhr.total * 100) + '% loaded'); },
@@ -96,14 +82,14 @@ export class ThreeComponent implements AfterViewInit, OnInit {
   }
 
     oynat():void{
-      alert("22222222222222222222222222222")
+    
     this.clip = this.obj.animations[this.animnum]
     this.mixer = new THREE.AnimationMixer(this.model)
     this.action = this.mixer.clipAction(this.clip);
     this.action.play();
      
     this.clock = new THREE.Clock();
-    alert("3333333333333333333333333")
+   
     this.animate();
   }
 
@@ -116,9 +102,7 @@ export class ThreeComponent implements AfterViewInit, OnInit {
    
   }
 
-  
-
-   
+     
 
     animate(): void {
       
@@ -128,7 +112,6 @@ export class ThreeComponent implements AfterViewInit, OnInit {
       this.controls.update();
       this.renderer.render(this.scene, this.camera);
    
-
   }
 
   onWindowResize(){
