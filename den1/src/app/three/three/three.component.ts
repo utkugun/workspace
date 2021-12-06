@@ -86,7 +86,7 @@ export class ThreeComponent implements AfterViewInit, OnInit {
       this.model.position.set(0, 0, 0);
       this.model.scale.set(0.01, 0.01, 0.01);
       this.scene.add(this.model)
-       oynat()
+       this.oynat()
     
     },
       function (xhr) { console.log((xhr.loaded / xhr.total * 100) + '% loaded'); },
