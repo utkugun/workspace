@@ -49,7 +49,7 @@ export class ThreeComponent implements AfterViewInit, OnInit {
  
     this.scene = new THREE.Scene();
     this.scene.clear();
-    this.scene.background = new THREE.Color(0xbfe3dd);
+   
     this.camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 100);
     this.camera.position.set(-1, 0.8, 5);
 
@@ -63,7 +63,14 @@ export class ThreeComponent implements AfterViewInit, OnInit {
 
     this.scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
     
-   
+    const loaderb = new THREE.TextureLoader()
+
+    loaderb.load( 'assets/backrounds/bg-collection-vi.jpg' ,(back)=>{
+
+      this.scene.background=back
+
+    },function (xhr) { console.log('aaaaaaaaaaaaaaaaaaaaaaaaa'); },
+       function (error) { console.log(error) });
  
     const loader = new GLTFLoader().setPath("assets/" + this.message.toLowerCase() + "/skin2/");
     loader.load("skin2.gltf", (obj) => {
