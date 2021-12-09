@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   pic: any = "";
   message: string = "";
   subscription: Subscription;
-
+  
   imgCollection: Array<object> = [];
 
 
