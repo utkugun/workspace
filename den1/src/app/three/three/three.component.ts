@@ -21,7 +21,7 @@ export class ThreeComponent implements AfterViewInit, OnInit {
   renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer()
 
   animnum: number = 0;
-  animations:any=[]
+  animations: any = []
   model: any
   mixer: any
   clip: any
@@ -32,26 +32,26 @@ export class ThreeComponent implements AfterViewInit, OnInit {
   clock: any
   obj: any
   message: string
-  key:string=""
-  soundurl:string="https://raw.communitydragon.org/11.23/plugins/rcp-be-lol-game-data/global/tr_tr/v1/champion-choose-vo/166.ogg"
+  key: string = ""
+  soundurl: string = "https://raw.communitydragon.org/11.23/plugins/rcp-be-lol-game-data/global/tr_tr/v1/champion-choose-vo/166.ogg"
   ngOnInit(): void {
 
-this.subscription = this.data.currentMessage.subscribe((message: string) => {
-          const loader1 = new GLTFLoader().setPath("assets/" + this.message.toLowerCase() + "/skin2/");
-            loader1.load("skin2.gltf", (obj1) => {
-          
-           
-             obj1.animations.forEach((element:any) => {
-              this.animations.push(element.uuid)
-            });
-            
-          });
-})
-   }
+    this.subscription = this.data.currentMessage.subscribe((message: string) => {
+      const loader1 = new GLTFLoader().setPath("assets/" + this.message.toLowerCase() + "/skin2/");
+      loader1.load("skin2.gltf", (obj1) => {
+        let clips = obj1.animations
+
+        clips.forEach((clip: any) => {
+          this.animations.push(clip.uuid)
+        });
+
+      });
+    })
+  }
 
   ngAfterViewInit(): void {
 
-    this.renderer.setSize(window.innerWidth/2, window.innerHeight/2);
+    this.renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
     this.rend.nativeElement.appendChild(this.renderer.domElement);
 
     this.subscription = this.data.currentMessage.subscribe((message: string) => {
@@ -59,14 +59,14 @@ this.subscription = this.data.currentMessage.subscribe((message: string) => {
 
       this.api.getir().subscribe((d: Record<any, any>) => {
 
-        this.soundurl="https://raw.communitydragon.org/11.23/plugins/rcp-be-lol-game-data/global/tr_tr/v1/champion-choose-vo/"
-        this.key=d["data"][this.message]["key"]
-        this.soundurl=this.soundurl+this.key+".ogg"
-          this.playsound()
-       
+        this.soundurl = "https://raw.communitydragon.org/11.23/plugins/rcp-be-lol-game-data/global/tr_tr/v1/champion-choose-vo/"
+        this.key = d["data"][this.message]["key"]
+        this.soundurl = this.soundurl + this.key + ".ogg"
+        this.playsound()
+
       })
 
-  
+
 
       this.basla()
 
@@ -75,7 +75,7 @@ this.subscription = this.data.currentMessage.subscribe((message: string) => {
 
 
   basla(): void {
-      
+
     this.scene = new THREE.Scene();
     this.scene.clear();
 
@@ -88,18 +88,18 @@ this.subscription = this.data.currentMessage.subscribe((message: string) => {
     this.controls.minDistance = 1;
     this.controls.maxDistance = 10000;
 
-    window.addEventListener( 'resize', this.onWindowResize, false );
+    window.addEventListener('resize', this.onWindowResize, false);
 
     this.scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
 
     const loaderb = new THREE.TextureLoader()
 
-    loaderb.load( 'assets/backrounds/bg-collection-vi.jpg' ,(back)=>{
+    loaderb.load('assets/backrounds/bg-collection-vi.jpg', (back) => {
 
-      this.scene.background=back
+      this.scene.background = back
 
-    },function (xhr) {console.log(xhr) },
-       function (error) { console.log(error) });
+    }, function (xhr) { console.log(xhr) },
+      function (error) { console.log(error) });
 
     const loader = new GLTFLoader().setPath("assets/" + this.message.toLowerCase() + "/skin2/");
     loader.load("skin2.gltf", (obj) => {
@@ -117,7 +117,7 @@ this.subscription = this.data.currentMessage.subscribe((message: string) => {
 
   }
 
-    oynat():void{
+  oynat(): void {
 
     this.clip = this.obj.animations[this.animnum]
     this.mixer = new THREE.AnimationMixer(this.model)
@@ -140,26 +140,26 @@ this.subscription = this.data.currentMessage.subscribe((message: string) => {
 
 
 
-    animate(): void {
+  animate(): void {
 
-      requestAnimationFrame(this.animate.bind(this))
-      var delta = this.clock.getDelta()
-      this.mixer.update(delta);
-      this.controls.update();
-      this.renderer.render(this.scene, this.camera);
+    requestAnimationFrame(this.animate.bind(this))
+    var delta = this.clock.getDelta()
+    this.mixer.update(delta);
+    this.controls.update();
+    this.renderer.render(this.scene, this.camera);
 
   }
 
-  onWindowResize(){
+  onWindowResize() {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize( window.innerWidth, window.innerHeight );
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
 
   }
 
-  playsound(): void{
+  playsound(): void {
 
-         this.audio.nativeElement.load()
+    this.audio.nativeElement.load()
 
 
 

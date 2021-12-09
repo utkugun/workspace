@@ -1,26 +1,32 @@
 Animasyon Seç: <mat-form-field appearance="fill">
-    <mat-select  #t (selectionChange)="sel(t.value)">
-      <mat-option [value]=0>Animation 1</mat-option>
-      <mat-option [value]=1>Animation 2</mat-option>
-      <mat-option [value]=3>Animation 3</mat-option>
-      <mat-option [value]=5>Animation 4</mat-option>
-      <mat-option [value]=7>Animation 5</mat-option>
-      <mat-option [value]=9>Animation 6</mat-option>
-      <mat-option [value]=11>Animation 7</mat-option>
-      <mat-option [value]=13>Animation 8</mat-option>
-      <mat-option [value]=15>Animation 9</mat-option>
-      <mat-option [value]=17>Animation 10</mat-option>
-      <mat-option [value]=19>Animation 11</mat-option>
-      <mat-option [value]=21>Animation 12</mat-option>
-    </mat-select>
-  </mat-form-field>
-  
+  <mat-select #t (selectionChange)="sel(t.value)">
+    <mat-option [value]=0>Animation 1</mat-option>
+    <mat-option [value]=1>Animation 2</mat-option>
+    <mat-option [value]=3>Animation 3</mat-option>
+    <mat-option [value]=5>Animation 4</mat-option>
+    <mat-option [value]=7>Animation 5</mat-option>
+    <mat-option [value]=9>Animation 6</mat-option>
+    <mat-option [value]=11>Animation 7</mat-option>
+    <mat-option [value]=13>Animation 8</mat-option>
+    <mat-option [value]=15>Animation 9</mat-option>
+    <mat-option [value]=17>Animation 10</mat-option>
+    <mat-option [value]=19>Animation 11</mat-option>
+    <mat-option [value]=21>Animation 12</mat-option>
+  </mat-select>
+</mat-form-field>
 
 
- 
- 
- 
-  Ses: <audio controls  #audio>
-  <source src={{soundurl}}  type="audio/ogg">
-  </audio>
-<div #rend ></div>
+<mat-form-field appearance="fill">
+  <mat-select #an )">
+    <mat-option **ngFor="let an of animations">{{an}}1</mat-option>
+
+  </mat-select>
+</mat-form-field>
+
+
+
+
+Ses: <audio controls #audio>
+  <source src={{soundurl}} type="audio/ogg">
+</audio>
+<div #rend></div>
