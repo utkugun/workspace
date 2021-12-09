@@ -3,7 +3,6 @@ import * as THREE from "three";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { ElementRef, ViewChild } from '@angular/core';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DataService } from "../../data.service";
 import { Subscription } from 'rxjs';
 import { ApiService } from '../../api.service';
@@ -22,7 +21,7 @@ export class ThreeComponent implements AfterViewInit, OnInit {
   renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer()
 
   animnum: number = 0;
-
+  animations:any=[]
   model: any
   mixer: any
   clip: any
@@ -37,7 +36,17 @@ export class ThreeComponent implements AfterViewInit, OnInit {
   soundurl:string="https://raw.communitydragon.org/11.23/plugins/rcp-be-lol-game-data/global/tr_tr/v1/champion-choose-vo/166.ogg"
   ngOnInit(): void {
 
-
+this.subscription = this.data.currentMessage.subscribe((message: string) => {
+          const loader1 = new GLTFLoader().setPath("assets/" + this.message.toLowerCase() + "/skin2/");
+            loader1.load("skin2.gltf", (obj1) => {
+          
+           
+             obj1.animations.forEach((element:any) => {
+              this.animations.push(element.uuid)
+            });
+            
+          });
+})
    }
 
   ngAfterViewInit(): void {
@@ -54,10 +63,10 @@ export class ThreeComponent implements AfterViewInit, OnInit {
         this.key=d["data"][this.message]["key"]
         this.soundurl=this.soundurl+this.key+".ogg"
           this.playsound()
-
+       
       })
 
-
+  
 
       this.basla()
 
