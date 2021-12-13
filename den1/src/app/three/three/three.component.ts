@@ -21,10 +21,11 @@ export class ThreeComponent implements AfterViewInit, OnInit {
   renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer()
 
   animnum: number = 0;
-  animations: any = []
+  animations: string[] = ["aaa","mmm"]
   model: any
   mixer: any
   clip: any
+  clips: any
   action: any
   controls: any
   scene: any
@@ -34,20 +35,7 @@ export class ThreeComponent implements AfterViewInit, OnInit {
   message: string
   key: string = ""
   soundurl: string = "https://raw.communitydragon.org/11.23/plugins/rcp-be-lol-game-data/global/tr_tr/v1/champion-choose-vo/166.ogg"
-  ngOnInit(): void {
-
-    this.subscription = this.data.currentMessage.subscribe((message: string) => {
-      const loader1 = new GLTFLoader().setPath("assets/" + this.message.toLowerCase() + "/skin2/");
-      loader1.load("skin2.gltf", (obj1) => {
-        let clips = obj1.animations
-
-        clips.forEach((clip: any) => {
-          this.animations.push(clip.uuid)
-        });
-
-      });
-    })
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
 
