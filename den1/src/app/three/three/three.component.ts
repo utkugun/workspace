@@ -117,8 +117,11 @@ export class ThreeComponent implements AfterViewInit, OnInit {
     mesh.rotation.x = - Math.PI * 0.5;
     mesh.receiveShadow = true;
     this.scene.add(mesh);
+    
     const ambient = new THREE.AmbientLight(0xffffff, 1);
+    ambient.castShadow=true
     this.scene.add(ambient);
+   
     var spotLight = new THREE.SpotLight(0xffffff);
     spotLight.position.set(1, 2, 0);
     spotLight.angle = Math.PI / 4;
@@ -128,10 +131,12 @@ export class ThreeComponent implements AfterViewInit, OnInit {
     spotLight.shadow.camera.near = 0.5; // default
     spotLight.shadow.camera.far = 500; // default
     spotLight.shadow.focus = 1; // default
-    this.scene.add(spotLight);
+   
     ///////////////////////////////////////////////////
    
       this.scene.add(this.model)
+      spotLight.target=this.model
+      this.scene.add(spotLight);
       this.scene.background = new THREE.Color(0x808080);
 
       this.oynat()
