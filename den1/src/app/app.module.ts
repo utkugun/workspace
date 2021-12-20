@@ -23,6 +23,7 @@ import { SafePipe } from './safe.pipe';
 import { ThreeComponent } from './three/three/three.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent, ResimComponent,TreeComponent, DetayComponent, SpellsComponent, SafePipe, ThreeComponent

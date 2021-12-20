@@ -1,12 +1,14 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as THREE from "three";
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+
+
 import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { ElementRef, ViewChild } from '@angular/core';
 import { DataService } from "../../data.service";
 import { Subscription } from 'rxjs';
 import { ApiService } from '../../api.service';
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 @Component({
   selector: 'app-three',
   templateUrl: './three.component.html',
@@ -126,11 +128,7 @@ export class ThreeComponent implements AfterViewInit, OnInit {
     spotLight.position.set(1, 2, 0);
     spotLight.angle = Math.PI / 4;
     spotLight.castShadow = true;
-    spotLight.shadow.mapSize.width = 512; // default
-    spotLight.shadow.mapSize.height = 512; // default
-    spotLight.shadow.camera.near = 0.5; // default
-    spotLight.shadow.camera.far = 500; // default
-    spotLight.shadow.focus = 1; // default
+
    
     ///////////////////////////////////////////////////
    

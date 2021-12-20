@@ -6,13 +6,15 @@ import { ResimComponent } from './resim/resim.component';
 import { DetayComponent } from './detay/detay.component';
 import { SpellsComponent } from './detay/spells/spells.component';
 import { ThreeComponent } from './three/three/three.component';
+;
 const routes: Routes = [ 
 { path: 'tree', component: TreeComponent },
 { path: '.', component: AppComponent },
 { path: 'resim', component: ResimComponent },
 { path: 'detay', component: DetayComponent },
 { path: 'detay/spells', component: SpellsComponent },
-{ path: 'three/three', component: ThreeComponent }
+{ path: 'three/three', component: ThreeComponent },
+
 ];
 
 @NgModule({
